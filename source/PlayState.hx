@@ -1485,8 +1485,6 @@ class PlayState extends MusicBeatState
 	
 	public function addShaderToCamera(cam:String,effect:Dynamic){//STOLE FROM ANDROMEDA
 
-
-
 		switch(cam.toLowerCase()) {
 			case 'camhud' | 'hud':
 					camHUDShaders.push(effect);
@@ -1518,22 +1516,14 @@ class PlayState extends MusicBeatState
 					var OBJ = Reflect.getProperty(PlayState.instance,cam);
 					Reflect.setProperty(OBJ,"shader", effect.shader);
 				}
-
-
-
-
 		}
-
-
-
-
     }
 
     public function removeShaderFromCamera(cam:String,effect:ShaderEffect){
 
 
-		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud': 
+	switch(cam.toLowerCase()) {
+		case 'camhud' | 'hud': 
     camHUDShaders.remove(effect);
     var newCamEffects:Array<BitmapFilter>=[];
     for(i in camHUDShaders){
@@ -1566,7 +1556,6 @@ class PlayState extends MusicBeatState
 
   public function clearShaderFromCamera(cam:String){
 
-
 		switch(cam.toLowerCase()) {
 			case 'camhud' | 'hud': 
 				camHUDShaders = [];
@@ -1585,13 +1574,7 @@ class PlayState extends MusicBeatState
 				var newCamEffects:Array<BitmapFilter>=[];
 				camGame.setFilters(newCamEffects);
 		}
-
-
-  }
-
-
-
-
+  	}
 
 	function startCharacterPos(char:Character, ?gfCheck:Bool = false) {
 		if(gfCheck && char.curCharacter.startsWith('gf')) { //IF DAD IS GIRLFRIEND, HE GOES TO HER POSITION
