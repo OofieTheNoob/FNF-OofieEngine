@@ -455,7 +455,7 @@ class Shader
 		}
 	}
 
-	@:noCompletion private function __initGL():Void
+	@:noCompletion public function __initGL():Void
 	{
 		if (__glSourceDirty || __paramBool == null)
 		{

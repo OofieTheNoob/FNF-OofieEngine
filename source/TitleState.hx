@@ -118,7 +118,6 @@ class TitleState extends MusicBeatState
 
 		// DEBUG BULLSHIT
 
-		swagShader = new ColorSwap();
 		super.create();
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
@@ -208,7 +207,6 @@ class TitleState extends MusicBeatState
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
-	var swagShader:ColorSwap = null;
 
 	function startIntro()
 	{
@@ -266,20 +264,13 @@ class TitleState extends MusicBeatState
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
-		swagShader = new ColorSwap();
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
-		//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
-		//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
-		//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
-
 		add(gfDance);
-		gfDance.shader = swagShader.shader;
 		add(logoBl);
-		logoBl.shader = swagShader.shader;
 
 		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
 		#if (desktop && MODS_ALLOWED)
@@ -420,6 +411,8 @@ class TitleState extends MusicBeatState
 			if (titleTimer > 2) titleTimer -= 2;
 		}
 
+		// EASTER EGG
+
 		if (initialized && !transitioning && skippedIntro)
 		{
 			if (newTitle && !pressedEnter)
@@ -465,12 +458,6 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		}
 
-		if(swagShader != null)
-		{
-			if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
-			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
-		}
-
 		super.update(elapsed);
 	}
 
@@ -478,7 +465,7 @@ class TitleState extends MusicBeatState
 	{
 		for (i in 0...textArray.length)
 		{
-			var money:Alphabet = new Alphabet(0, 0, textArray[i], true, false);
+			var money:Alphabet = new Alphabet(0, 0, textArray[i], true);
 			money.screenCenter(X);
 			money.y += (i * 60) + 200 + offset;
 			if(credGroup != null && textGroup != null) {
@@ -491,7 +478,7 @@ class TitleState extends MusicBeatState
 	function addMoreText(text:String, ?offset:Float = 0)
 	{
 		if(textGroup != null && credGroup != null) {
-			var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
+			var coolText:Alphabet = new Alphabet(0, 0, text, true);
 			coolText.screenCenter(X);
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
@@ -588,9 +575,9 @@ class TitleState extends MusicBeatState
 	var increaseVolume:Bool = false;
 	function skipIntro():Void
 	{
-		remove(ngSpr);
-		remove(credGroup);
-		FlxG.camera.flash(FlxColor.WHITE, 4);
-		skippedIntro = true;
+			remove(ngSpr);
+			remove(credGroup);
+			FlxG.camera.flash(FlxColor.WHITE, 4);
+			skippedIntro = true;
 	}
 }
