@@ -324,11 +324,7 @@ class Paths
 	}
 
 	inline static public function formatToSongPath(path:String) {
-		var invalidChars = ~/[~&\\;:<>#]/;
-		var hideChars = ~/[.,'"%?!]/;
-
-		var path = invalidChars.split(path.replace(' ', '-')).join("-");
-		return hideChars.split(path).join("").toLowerCase();
+		return path.toLowerCase().replace(' ', '-');
 	}
 
 	// completely rewritten asset loading? fuck!
@@ -426,7 +422,8 @@ class Paths
 	inline static public function modsTxt(key:String) {
 		return modFolders('images/' + key + '.txt');
 	}
-	inline static public function modsShaderFragment(key:String, ?library:String) // so haxe can shut up
+
+	inline static public function modsShaderFragment(key:String, ?library:String)
 	{
 		return modFolders('shaders/'+key+'.frag');
 	}
@@ -434,6 +431,11 @@ class Paths
 	{
 		return modFolders('shaders/'+key+'.vert');
 	}
+	
+	/* Goes unused for now
+	inline static public function modsAchievements(key:String) {
+		return modFolders('achievements/' + key + '.json');
+	}*/
 
 	static public function modFolders(key:String) {
 		if(currentModDirectory != null && currentModDirectory.length > 0) {
